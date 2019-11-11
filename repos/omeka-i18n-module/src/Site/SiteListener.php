@@ -108,7 +108,10 @@ class SiteListener extends AbstractListenerAggregate
         }
 
         $this->localeHelper->setLocale($locale);
-        $session['locale'] = $locale;
+	// do not clobber locale unless multi-lingual is set.
+	if ($isMultiLingual) {
+	    $session['locale'] = $locale;
+	}
 
         return true;
     }
